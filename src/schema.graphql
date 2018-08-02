@@ -1,0 +1,95 @@
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  profile_url: String
+  name: String!
+  join_date: String
+  age: String
+  birthday: String
+  gender: String
+  grade: String
+}
+
+type Restaurant {
+  id: ID!
+  name: String!
+  address: String!
+  category: String!
+  min_price: String!
+  menues(
+    id: Int
+  ): [Menu]
+  detail: String
+  average_rating: Float
+}
+
+type Menu {
+  id: ID!
+  restaurant_id: ID!
+  name: String!
+  price: String!
+}
+
+type Order {
+  id: ID!
+  user_email: String!
+  restaurant_id: ID!
+  join_date: String!
+  food: String!
+  age: String
+  gender: String
+}
+
+type Event {
+  id: ID!
+  restaurant_id: ID!
+  title: String!
+  content: String!
+  begin_date: String!
+  end_date: String!
+  image_url: String
+}
+
+type Review {
+  id: ID!
+  user_email: ID!
+  restaurant_id: ID!
+  date: String!
+  rating: Float!
+  comment: String
+}
+
+type Ranking {
+  id: ID!
+  restaurant_id: ID!
+  order_count: Int!
+  bookmark_count: Int!
+  click_count: Int!
+  ranking: Int!
+}
+input LoginInput {
+  id: ID!,
+  email: String!, 
+  password: String!,
+  name: String!,
+  profile: String,
+  age: String,
+  birthday: String,
+  gender: String
+}
+type Query {
+  login(
+    email: String!, 
+    password: String!
+  ): User
+  users: [User]
+  restaurants(
+    category: String
+  ): [Restaurant]
+}
+type Mutation {
+  register(
+    input: LoginInput
+  ): String!
+}
