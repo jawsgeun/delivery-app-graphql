@@ -33,12 +33,10 @@ type Menu {
 
 type Order {
   id: ID!
-  user_email: String!
+  user_id: ID!
   restaurant_id: ID!
-  join_date: String!
-  food: String!
-  age: String
-  gender: String
+  menu_id: ID!
+  date: String
 }
 
 type Event {
@@ -92,4 +90,5 @@ type Mutation {
   register(
     input: LoginInput
   ): String!
+  
 }
