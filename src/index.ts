@@ -1,8 +1,8 @@
-import express from 'express';
-import graphqlHTTP from 'express-graphql';
-import resolvers from './resolver';
-import fs from 'fs';
+import * as express from 'express';
+import * as graphqlHTTP from 'express-graphql';
+import * as fs from 'fs';
 import { makeExecutableSchema } from 'graphql-tools';
+import resolvers from './resolver';
 
 const schema = makeExecutableSchema({
   typeDefs : fs.readFileSync(`${__dirname}/schema.graphql`).toString(),
