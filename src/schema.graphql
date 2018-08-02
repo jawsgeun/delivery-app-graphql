@@ -17,7 +17,7 @@ type Restaurant {
   address: String!
   category: String!
   min_price: String!
-  menues(
+  menus(
     id: Int
   ): [Menu]
   detail: String

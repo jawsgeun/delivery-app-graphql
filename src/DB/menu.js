@@ -1,4 +1,4 @@
-let menues = [
+let menus = [
   {
     id: 1,
     restaurant_id: 1,
@@ -61,4 +61,4 @@ let menues = [
   },
 ]
 
-export default menues;
+export default menus;

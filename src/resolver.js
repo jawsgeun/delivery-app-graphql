@@ -1,6 +1,6 @@
 import users from './DB/user';
 import restaurants from './DB/restaurant';
-import menues from './DB/menu';
+import menus from './DB/menu';
 
 
 const login = (email, password) => {
@@ -15,7 +15,7 @@ const getRestaurantByCategory = (category) => {
   });
 }
 const getMenuById = (id) => {
-  return menues.filter((v) => {
+  return menus.filter((v) => {
     return v.restaurant_id === id;
   })
 }
@@ -47,7 +47,7 @@ const resolvers = {
     },
   },
   Restaurant: {
-    menues: ({ id }) => {
+    menus: ({ id }) => {
       return getMenuById(id);
     },
   }
