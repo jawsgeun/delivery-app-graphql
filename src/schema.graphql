@@ -2,8 +2,8 @@ type User {
   id: ID!
   email: String!
   password: String!
-  profile_url: String
   name: String!
+  profile_url: String
   join_date: String
   age: String
   birthday: String
@@ -67,14 +67,16 @@ type Ranking {
   ranking: Int!
 }
 input LoginInput {
-  id: ID!,
-  email: String!, 
-  password: String!,
-  name: String!,
-  profile: String,
-  age: String,
-  birthday: String,
+  id: ID!
+  email: String!
+  password: String!
+  name: String!
+  profile_url: String
+  join_date: String
+  age: String
+  birthday: String
   gender: String
+  grade: String
 }
 type Query {
   login(
