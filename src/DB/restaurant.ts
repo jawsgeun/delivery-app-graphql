@@ -1,4 +1,14 @@
-let restaurants = [
+export interface Restaurant {
+  id: number;
+  name: string;
+  address: string;
+  category: string;
+  min_price: string;
+  detail: string;
+  average_rating: number;
+}
+
+export let restaurants: Restaurant[] = [
   {
     id: 1,
     name: '소떡소떡',
@@ -26,6 +36,4 @@ let restaurants = [
     detail: undefined,
     average_rating: 4.5,
   },
-]
-
-export default restaurants;
+];

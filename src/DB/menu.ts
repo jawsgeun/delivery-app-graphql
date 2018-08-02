@@ -1,4 +1,11 @@
-let menus = [
+export interface Menu {
+  id: number;
+  restaurant_id: number;
+  name: string;
+  price: string;
+}
+
+export let menus: Menu[] = [
   {
     id: 1,
     restaurant_id: 1,
@@ -59,6 +66,4 @@ let menus = [
     name: '만두라면',
     price: '3000',
   },
-]
-
-export default menus;
+];
