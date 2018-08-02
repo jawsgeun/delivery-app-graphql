@@ -4,7 +4,7 @@ This is GraphQL Example for delevery-app
 
 # Usage
 
-### To starting test
+### To start
 
 The first time, get all the dependencies loaded via
 
