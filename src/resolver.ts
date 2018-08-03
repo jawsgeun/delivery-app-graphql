@@ -1,5 +1,6 @@
 import { IResolvers } from '../node_modules/graphql-tools';
 import * as m from './DB/menu';
+import * as o from './DB/order';
 import * as r from './DB/restaurant';
 import * as u from './DB/user';
 
@@ -14,6 +15,8 @@ const resolvers: IResolvers = {
       return r.getAllRestaurants();
     },
     menuByRestaurant: (obj, { id }) => m.getMenuByRestaurantId(id),
+    orderByUser: (obj, { id }) => o.getOrderByUserID(id),
+    orderByRestaurant: (obj, { id }) => o.getOrderByRestaurantID(id),
   },
   Mutation: {
     registerUser: (obj, { userInput }) => u.registerUser(userInput),
@@ -25,6 +28,9 @@ const resolvers: IResolvers = {
     registerMenu: (obj, { menuInput }) => m.registerMenu(menuInput),
     updateMenuInfo: (obj, { id, menuInput }) => m.updateMenuById(id, menuInput),
     removeMenu: (obj, { id }) => m.removeMenuById(id),
+    registerOrder: (obj, { orderInput }) => o.addOrder(orderInput),
+    updateOrderInfo: (obj, { id, orderInput }) => o.updateOrderById(id, orderInput),
+    removeOrder: (obj, { id }) => o.removeOrderById(id),
   },
   Restaurant: {
     menus: ({ id }): m.Menu[] => m.getMenuByRestaurantId(id),

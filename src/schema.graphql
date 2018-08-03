@@ -91,6 +91,13 @@ input MenuInput {
   name: String!
   price: String!
 }
+input OrderInput {
+  id: Int!
+  user_id: Int!
+  restaurant_id: Int!
+  menu_id: Int!
+  date: String
+}
 type Query {
   login(
     email: String!, 
@@ -103,6 +110,12 @@ type Query {
   menuByRestaurant(
     id: Int!
   ): [Menu]
+  orderByUser(
+    id: Int!
+  ): [Order]
+  orderByRestaurant(
+    id: Int!
+  ): [Order]
 }
 type Mutation {
   registerUser(
@@ -135,4 +148,14 @@ type Mutation {
   removeMenu(
     id: Int!
   ): Menu
+  registerOrder(
+    orderInput: OrderInput!
+  ): Order
+  updateOrderInfo(
+    id: Int!
+    orderInput: OrderInput!
+  ): Order
+  removeOrder(
+    id: Int!
+  ): Order
 }
