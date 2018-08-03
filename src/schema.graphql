@@ -67,7 +67,6 @@ type Ranking {
   ranking: Int!
 }
 input UserInput {
-  id: Int!,
   email: String!, 
   password: String!,
   name: String!,
@@ -77,7 +76,6 @@ input UserInput {
   gender: String
 }
 input RestaurantInput {
-  id: Int!
   name: String!
   address: String!
   category: String!
@@ -86,13 +84,11 @@ input RestaurantInput {
   average_rating: Float
 }
 input MenuInput {
-  id: Int!
   restaurant_id: Int!
   name: String!
   price: String!
 }
 input OrderInput {
-  id: Int!
   user_id: Int!
   restaurant_id: Int!
   menu_id: Int!

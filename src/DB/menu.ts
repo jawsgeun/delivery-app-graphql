@@ -75,6 +75,7 @@ export const getMenuByRestaurantId = (id: number): Menu[] => {
 };
 
 export const registerMenu = (menu: Menu): Menu => {
+  menu.id = menus.length + 1;
   menus.push(menu);
   return menu;
 };
