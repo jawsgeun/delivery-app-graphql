@@ -1,5 +1,5 @@
 type User {
-  id: ID!
+  id: Int!
   email: String!
   password: String!
   profile_url: String
@@ -12,7 +12,7 @@ type User {
 }
 
 type Restaurant {
-  id: ID!
+  id: Int!
   name: String!
   address: String!
   category: String!
@@ -25,23 +25,23 @@ type Restaurant {
 }
 
 type Menu {
-  id: ID!
-  restaurant_id: ID!
+  id: Int!
+  restaurant_id: Int!
   name: String!
   price: String!
 }
 
 type Order {
-  id: ID!
-  user_id: ID!
-  restaurant_id: ID!
-  menu_id: ID!
+  id: Int!
+  user_id: Int!
+  restaurant_id: Int!
+  menu_id: Int!
   date: String
 }
 
 type Event {
-  id: ID!
-  restaurant_id: ID!
+  id: Int!
+  restaurant_id: Int!
   title: String!
   content: String!
   begin_date: String!
@@ -50,24 +50,24 @@ type Event {
 }
 
 type Review {
-  id: ID!
-  user_email: ID!
-  restaurant_id: ID!
+  id: Int!
+  user_email: Int!
+  restaurant_id: Int!
   date: String!
   rating: Float!
   comment: String
 }
 
 type Ranking {
-  id: ID!
-  restaurant_id: ID!
+  id: Int!
+  restaurant_id: Int!
   order_count: Int!
   bookmark_count: Int!
   click_count: Int!
   ranking: Int!
 }
-input LoginInput {
-  id: ID!,
+input UserInput {
+  id: Int!,
   email: String!, 
   password: String!,
   name: String!,
@@ -75,6 +75,21 @@ input LoginInput {
   age: String,
   birthday: String,
   gender: String
+}
+input RestaurantInput {
+  id: Int!
+  name: String!
+  address: String!
+  category: String!
+  min_price: String!
+  detail: String
+  average_rating: Float
+}
+input MenuInput {
+  id: Int!
+  restaurant_id: Int!
+  name: String!
+  price: String!
 }
 type Query {
   login(
@@ -85,10 +100,39 @@ type Query {
   restaurants(
     category: String
   ): [Restaurant]
+  menuByRestaurant(
+    id: Int!
+  ): [Menu]
 }
 type Mutation {
-  register(
-    input: LoginInput
+  registerUser(
+    userInput: UserInput!
   ): String!
-  
+  removeUser(
+    id: Int!
+  ): User
+  updateUserInfo(
+    id: Int!
+    input: UserInput!
+  ): User
+  registerRestaurant(
+    restaurantInput: RestaurantInput!
+  ): Restaurant
+  removeRestaurant(
+    id: Int!
+  ): Restaurant
+  updateRestaurantInfo(
+    id: Int!
+    restaurantInput: RestaurantInput!
+  ): Restaurant
+  registerMenu(
+    menuInput: MenuInput!
+  ): Menu
+  updateMenuInfo(
+    id: Int!
+    menuInput: MenuInput!
+  ): Menu
+  removeMenu(
+    id: Int!
+  ): Menu
 }

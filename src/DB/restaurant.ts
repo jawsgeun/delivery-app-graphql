@@ -8,7 +8,7 @@ export interface Restaurant {
   average_rating: number;
 }
 
-export let restaurants: Restaurant[] = [
+let restaurants: Restaurant[] = [
   {
     id: 1,
     name: '소떡소떡',
@@ -37,3 +37,41 @@ export let restaurants: Restaurant[] = [
     average_rating: 4.5,
   },
 ];
+
+export const getAllRestaurants = (): Restaurant[] => {
+  return restaurants;
+};
+export const getRestaurantsByCategory = (category: string): Restaurant[] => {
+  return restaurants.filter((v: Restaurant): boolean => {
+    return v.category === category;
+  });
+};
+export const registerRestaurant = (restaurant: Restaurant): Restaurant => {
+  restaurants.push(restaurant);
+  return restaurant;
+};
+export const removeRestaurantById = (id: number): Restaurant => {
+  let removed: Restaurant;
+  restaurants = restaurants.filter((v: Restaurant): boolean => {
+    if (v.id === id) {
+      removed = v;
+      return false;
+    }
+    return true;
+  });
+  return removed;
+};
+export const updateRestaurantById = (id: number, restaurant: Restaurant): Restaurant => {
+  let isChanged: boolean = false;
+  restaurants = restaurants.map((v: Restaurant): Restaurant => {
+    if (v.id === id) {
+      v = restaurant;
+      isChanged = true;
+    }
+    return v;
+  });
+  if (isChanged) {
+    return restaurant;
+  }
+  return undefined;
+};

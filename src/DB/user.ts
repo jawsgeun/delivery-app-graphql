@@ -11,7 +11,7 @@ export interface User {
   grade: string;
 }
 
-export let users: User[] = [
+let users: User[] = [
   {
     id: 1,
     email: 'whtnrms@naver.com',
@@ -25,3 +25,53 @@ export let users: User[] = [
     grade: 'gold',
   },
 ];
+
+export const getAllUsers = (): User[] => {
+  return users;
+};
+
+export const login = (email: string, password: string): User => {
+  const result = users.filter((v: User) => {
+    return v.email === email && v.password === password;
+  });
+  if (result.length === 0) {
+    return undefined;
+  }
+  return result[0];
+};
+
+export const registerUser = (input: User): string => {
+  console.log(input);
+  if (users.filter((v: User) => v.email === input.email).length > 0) {
+    return 'duplicated';
+  }
+  users.push(input);
+  return 'success';
+};
+
+export const removeUserById = (id: number): User => {
+  let removed: User;
+  users = users.filter((v: User): boolean => {
+    if (v.id === id) {
+      removed = v;
+      return false;
+    }
+    return true;
+  });
+  return removed;
+};
+
+export const updateUserById = (id: number, user: User): User => {
+  let isChanged: boolean = false;
+  users = users.map((v: User): User => {
+    if (v.id === id) {
+      v = user;
+      isChanged = true;
+    }
+    return v;
+  });
+  if (isChanged) {
+    return user;
+  }
+  return undefined;
+};
