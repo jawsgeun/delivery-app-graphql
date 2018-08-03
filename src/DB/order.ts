@@ -32,7 +32,7 @@ export const getOrderByRestaurantID = (id: number): Order[] => {
   });
 };
 
-export const addOrder = (order: Order): Order => {
+export const registerOrder = (order: Order): Order => {
   orders.push(order);
   return order;
 };

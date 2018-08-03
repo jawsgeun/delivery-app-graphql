@@ -41,7 +41,6 @@ export const login = (email: string, password: string): User => {
 };
 
 export const registerUser = (input: User): string => {
-  console.log(input);
   if (users.filter((v: User) => v.email === input.email).length > 0) {
     return 'duplicated';
   }

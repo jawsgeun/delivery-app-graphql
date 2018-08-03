@@ -28,7 +28,7 @@ const resolvers: IResolvers = {
     registerMenu: (obj, { menuInput }) => m.registerMenu(menuInput),
     updateMenuInfo: (obj, { id, menuInput }) => m.updateMenuById(id, menuInput),
     removeMenu: (obj, { id }) => m.removeMenuById(id),
-    registerOrder: (obj, { orderInput }) => o.addOrder(orderInput),
+    registerOrder: (obj, { orderInput }) => o.registerOrder(orderInput),
     updateOrderInfo: (obj, { id, orderInput }) => o.updateOrderById(id, orderInput),
     removeOrder: (obj, { id }) => o.removeOrderById(id),
   },
