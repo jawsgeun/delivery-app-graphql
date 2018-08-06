@@ -47,7 +47,10 @@ export const getRestaurantsByCategory = (category: string): Restaurant[] => {
   });
 };
 export const registerRestaurant = (restaurant: Restaurant): Restaurant => {
-  restaurant.id = restaurants[restaurants.length - 1].id + 1;
+  restaurant.id = 1;
+  if (restaurants.length > 0) {
+    restaurant.id = restaurants[restaurants.length - 1].id + 1;
+  }
   restaurants.push(restaurant);
   return restaurant;
 };

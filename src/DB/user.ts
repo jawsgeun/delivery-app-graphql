@@ -44,7 +44,10 @@ export const registerUser = (input: User): string => {
   if (users.filter((v: User) => v.email === input.email).length > 0) {
     return 'duplicated';
   }
-  input.id = users[users.length - 1].id + 1;
+  input.id = 1;
+  if (users.length > 0) {
+    input.id = users[users.length - 1].id + 1;
+  }
   users.push(input);
   return 'success';
 };
