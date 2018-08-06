@@ -26,6 +26,15 @@ let users: User[] = [
   },
 ];
 
+const isExist = (input: User): boolean => {
+  if (users.filter((v: User) => {
+    return v.email === input.email;
+  }).length > 0) {
+    return true;
+  }
+  return false;
+};
+
 export const getAllUsers = (): User[] => {
   return users;
 };
@@ -41,7 +50,7 @@ export const login = (email: string, password: string): User => {
 };
 
 export const registerUser = (input: User): string => {
-  if (users.filter((v: User) => v.email === input.email).length > 0) {
+  if (isExist(input)) {
     return 'duplicated';
   }
   input.id = 1;

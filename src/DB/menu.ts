@@ -68,19 +68,33 @@ let menus: Menu[] = [
   },
 ];
 
+const isExist = (menu: Menu): boolean => {
+  if (menus.filter((v: Menu) => {
+    return v.restaurant_id === menu.restaurant_id &&
+      v.name === menu.name &&
+      v.price === menu.price;
+  }).length > 0) {
+    return true;
+  }
+  return false;
+};
+
 export const getMenuByRestaurantId = (id: number): Menu[] => {
   return menus.filter((v: Menu) => {
     return v.restaurant_id === id;
   });
 };
 
-export const registerMenu = (menu: Menu): Menu => {
+export const registerMenu = (menu: Menu): string => {
+  if (isExist(menu)) {
+    return 'duplicated';
+  }
   menu.id = 1;
   if (menus.length > 0) {
     menu.id = menus[menus.length - 1].id + 1;
   }
   menus.push(menu);
-  return menu;
+  return 'success';
 };
 
 export const updateMenuById = (id: number, menu: Menu): Menu => {

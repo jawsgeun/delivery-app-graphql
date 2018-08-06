@@ -32,13 +32,13 @@ export const getOrderByRestaurantID = (id: number): Order[] => {
   });
 };
 
-export const registerOrder = (order: Order): Order => {
+export const registerOrder = (order: Order): string => {
   order.id = 1;
   if (orders.length > 0) {
     order.id = orders[orders.length - 1].id + 1;
   }
   orders.push(order);
-  return order;
+  return 'success';
 };
 
 export const removeOrderById = (id: number): Order => {

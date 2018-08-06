@@ -38,6 +38,16 @@ let restaurants: Restaurant[] = [
   },
 ];
 
+const isExist = (restaurant: Restaurant): boolean => {
+  if (restaurants.filter((v: Restaurant) => {
+    return v.name === restaurant.name &&
+      v.address === restaurant.address;
+  }).length > 0) {
+    return true;
+  }
+  return false;
+};
+
 export const getAllRestaurants = (): Restaurant[] => {
   return restaurants;
 };
@@ -46,13 +56,16 @@ export const getRestaurantsByCategory = (category: string): Restaurant[] => {
     return v.category === category;
   });
 };
-export const registerRestaurant = (restaurant: Restaurant): Restaurant => {
+export const registerRestaurant = (restaurant: Restaurant): string => {
+  if (isExist(restaurant)) {
+    return 'duplicated';
+  }
   restaurant.id = 1;
   if (restaurants.length > 0) {
     restaurant.id = restaurants[restaurants.length - 1].id + 1;
   }
   restaurants.push(restaurant);
-  return restaurant;
+  return 'success';
 };
 export const removeRestaurantById = (id: number): Restaurant => {
   let removed: Restaurant;
