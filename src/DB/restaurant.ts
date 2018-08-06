@@ -47,7 +47,7 @@ export const getRestaurantsByCategory = (category: string): Restaurant[] => {
   });
 };
 export const registerRestaurant = (restaurant: Restaurant): Restaurant => {
-  restaurant.id = restaurants.length + 1;
+  restaurant.id = restaurants[restaurants.length - 1].id + 1;
   restaurants.push(restaurant);
   return restaurant;
 };

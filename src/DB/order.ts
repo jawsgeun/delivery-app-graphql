@@ -33,7 +33,7 @@ export const getOrderByRestaurantID = (id: number): Order[] => {
 };
 
 export const registerOrder = (order: Order): Order => {
-  order.id = orders.length + 1;
+  order.id = orders[orders.length - 1].id + 1;
   orders.push(order);
   return order;
 };
