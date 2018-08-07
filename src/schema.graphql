@@ -2,8 +2,8 @@ type User {
   id: Int!
   email: String!
   password: String!
-  profile_url: String
   name: String!
+  profile_url: String
   join_date: String
   age: String
   birthday: String
@@ -74,6 +74,7 @@ input UserInput {
   age: String,
   birthday: String,
   gender: String
+  grade: String
 }
 input RestaurantInput {
   name: String!
