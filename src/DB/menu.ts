@@ -5,7 +5,7 @@ export interface Menu {
   price: string;
 }
 
-export let menus: Menu[] = [
+let menus: Menu[] = [
   {
     id: 1,
     restaurant_id: 1,
@@ -67,3 +67,58 @@ export let menus: Menu[] = [
     price: '3000',
   },
 ];
+
+const isExist = (menu: Menu): boolean => {
+  if (menus.filter((v: Menu) => {
+    return v.restaurant_id === menu.restaurant_id &&
+      v.name === menu.name &&
+      v.price === menu.price;
+  }).length > 0) {
+    return true;
+  }
+  return false;
+};
+
+export const getMenuByRestaurantId = (id: number): Menu[] => {
+  return menus.filter((v: Menu) => {
+    return v.restaurant_id === id;
+  });
+};
+
+export const registerMenu = (menu: Menu): string => {
+  if (isExist(menu)) {
+    return 'duplicated';
+  }
+  menu.id = 1;
+  if (menus.length > 0) {
+    menu.id = menus[menus.length - 1].id + 1;
+  }
+  menus.push(menu);
+  return 'success';
+};
+
+export const updateMenuById = (id: number, menu: Menu): Menu => {
+  let isChanged: boolean = false;
+  menus = menus.map((v: Menu): Menu => {
+    if (v.id === id) {
+      v = menu;
+      isChanged = true;
+    }
+    return v;
+  });
+  if (isChanged) {
+    return menu;
+  }
+  return undefined;
+};
+export const removeMenuById = (id: number): Menu => {
+  let removed: Menu;
+  menus = menus.filter((v: Menu): boolean => {
+    if (v.id === id) {
+      removed = v;
+      return false;
+    }
+    return true;
+  });
+  return removed;
+};

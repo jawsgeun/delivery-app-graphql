@@ -8,7 +8,7 @@ export interface Restaurant {
   average_rating: number;
 }
 
-export let restaurants: Restaurant[] = [
+let restaurants: Restaurant[] = [
   {
     id: 1,
     name: '소떡소떡',
@@ -37,3 +37,58 @@ export let restaurants: Restaurant[] = [
     average_rating: 4.5,
   },
 ];
+
+const isExist = (restaurant: Restaurant): boolean => {
+  if (restaurants.filter((v: Restaurant) => {
+    return v.name === restaurant.name &&
+      v.address === restaurant.address;
+  }).length > 0) {
+    return true;
+  }
+  return false;
+};
+
+export const getAllRestaurants = (): Restaurant[] => {
+  return restaurants;
+};
+export const getRestaurantsByCategory = (category: string): Restaurant[] => {
+  return restaurants.filter((v: Restaurant): boolean => {
+    return v.category === category;
+  });
+};
+export const registerRestaurant = (restaurant: Restaurant): string => {
+  if (isExist(restaurant)) {
+    return 'duplicated';
+  }
+  restaurant.id = 1;
+  if (restaurants.length > 0) {
+    restaurant.id = restaurants[restaurants.length - 1].id + 1;
+  }
+  restaurants.push(restaurant);
+  return 'success';
+};
+export const removeRestaurantById = (id: number): Restaurant => {
+  let removed: Restaurant;
+  restaurants = restaurants.filter((v: Restaurant): boolean => {
+    if (v.id === id) {
+      removed = v;
+      return false;
+    }
+    return true;
+  });
+  return removed;
+};
+export const updateRestaurantById = (id: number, restaurant: Restaurant): Restaurant => {
+  let isChanged: boolean = false;
+  restaurants = restaurants.map((v: Restaurant): Restaurant => {
+    if (v.id === id) {
+      v = restaurant;
+      isChanged = true;
+    }
+    return v;
+  });
+  if (isChanged) {
+    return restaurant;
+  }
+  return undefined;
+};
