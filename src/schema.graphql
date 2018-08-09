@@ -4,11 +4,11 @@ type User {
   password: String!
   name: String!
   profile_url: String
-  join_date: String
+  join_date: String!
   age: String
   birthday: String
   gender: String
-  grade: String
+  grade: String!
 }
 
 type Restaurant {
@@ -21,7 +21,7 @@ type Restaurant {
     id: Int
   ): [Menu]
   detail: String
-  average_rating: Float
+  average_rating: Float!
 }
 
 type Menu {
@@ -36,7 +36,9 @@ type Order {
   user_id: Int!
   restaurant_id: Int!
   menu_id: Int!
-  date: String
+  date: String!
+  age: String
+  gender: String
 }
 
 type Event {
