@@ -8,6 +8,7 @@ export default (sequelize, DataTypes) => {
       },
       user_id: {
         type: DataTypes.INTEGER(11).UNSIGNED,
+        allowNull: false,
         references: {
           model: 'user',
           key: 'id',
@@ -15,6 +16,7 @@ export default (sequelize, DataTypes) => {
       },
       restaurant_id: {
         type: DataTypes.INTEGER(11).UNSIGNED,
+        allowNull: false,
         references: {
           model: 'restaurant',
           key: 'id',
@@ -22,6 +24,7 @@ export default (sequelize, DataTypes) => {
       },
       menu_id: {
         type: DataTypes.INTEGER(11).UNSIGNED,
+        allowNull: false,
         references: {
           model: 'menu',
           key: 'id',

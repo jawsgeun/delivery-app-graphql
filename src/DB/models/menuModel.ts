@@ -8,6 +8,7 @@ export default (sequelize, DataTypes) => {
       },
       restaurant_id: {
         type: DataTypes.INTEGER(11).UNSIGNED,
+        allowNull: false,
         references: {
           model: 'restaurant',
           key: 'id',
@@ -15,9 +16,11 @@ export default (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
       price: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
     },
     {

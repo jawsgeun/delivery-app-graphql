@@ -8,9 +8,11 @@ export default (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING(50),
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING(20),
+      allowNull: false,
     },
     profile_url: {
       type: DataTypes.TEXT,
@@ -18,6 +20,7 @@ export default (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING(15),
+      allowNull: false,
     },
     join_date: {
       type: DataTypes.DATE,

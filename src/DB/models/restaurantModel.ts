@@ -8,15 +8,19 @@ export default (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
       address: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
       category: {
         type: DataTypes.STRING(50),
+        allowNull: false,
       },
       min_price: {
         type: DataTypes.STRING(30),
+        allowNull: false,
       },
       detail: {
         type: DataTypes.TEXT,
