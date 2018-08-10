@@ -122,17 +122,17 @@ type Mutation {
   ): String!
   removeUser(
     id: Int!
-  ): User
+  ): String!
   updateUserInfo(
     id: Int!
-    input: UserInput!
+    userInput: UserInput!
   ): User
   registerRestaurant(
     restaurantInput: RestaurantInput!
   ): String!
   removeRestaurant(
     id: Int!
-  ): Restaurant
+  ): String!
   updateRestaurantInfo(
     id: Int!
     restaurantInput: RestaurantInput!
