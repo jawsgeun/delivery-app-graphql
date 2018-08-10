@@ -18,34 +18,31 @@ export const getAllUsers = async (): Promise<User[]> => {
 };
 
 export const login = async (email: string, password: string): Promise<User> => {
-  return await User
-    .findOne({
-      where: {
-        email,
-        password,
-      },
-    });
+  return await User.findOne({
+    where: {
+      email,
+      password,
+    },
+  });
 };
 
 export const registerUser = async (input: User): Promise<string> => {
-  const result = await User
-    .findOrCreate({
-      where: {
-        email: input.email,
-      },
-      defaults: input,
-    });
+  const result = await User.findOrCreate({
+    where: {
+      email: input.email,
+    },
+    defaults: input,
+  });
   const created = result[1];
   return created ? 'success' : 'duplicated';
 };
 
 export const removeUserById = async (id: number): Promise<string> => {
-  const affectedRow = await User
-    .destroy({
-      where: {
-        id,
-      },
-    });
+  const affectedRow = await User.destroy({
+    where: {
+      id,
+    },
+  });
   return affectedRow === 0 ? 'not exist' : 'completed';
 };
 
