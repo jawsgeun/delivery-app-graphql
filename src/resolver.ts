@@ -7,8 +7,8 @@ import * as u from './DB/user';
 const resolvers: IResolvers = {
   Query: {
     login: (obj, { email, password }) => u.login(email, password),
-    users: (): u.User[] => u.getAllUsers(),
-    restaurants: (obj, { category }): r.Restaurant[] => {
+    users: () => u.getAllUsers(),
+    restaurants: (obj, { category }) => {
       if (category) {
         return r.getRestaurantsByCategory(category);
       }
