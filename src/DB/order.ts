@@ -1,3 +1,5 @@
+import { Order } from './models/index';
+
 export interface Order {
   id: number;
   user_id: number;
@@ -8,62 +10,45 @@ export interface Order {
   gender: string;
 }
 
-let orders: Order[] = [
-  {
-    id: 1,
-    user_id: 1,
-    restaurant_id: 1,
-    menu_id: 1,
-    date: '18년 8월 2일',
-    age: '26',
-    gender: '남',
-  },
-];
-
-export const getOrderByUserID = (id: number): Order[] => {
-  return orders.filter((v: Order): boolean => {
-    return v.user_id === id;
+export const getOrderByUserID = async (id: number): Promise<Order[]> => {
+  return await Order.findAll({
+    where: {
+      user_id: id,
+    },
   });
 };
 
-export const getOrderByRestaurantID = (id: number): Order[] => {
-  return orders.filter((v: Order): boolean => {
-    return v.restaurant_id === id;
+export const getOrderByRestaurantID = async (id: number): Promise<Order[]> => {
+  return await Order.findAll({
+    where: {
+      restaurant_id: id,
+    },
   });
 };
 
-export const registerOrder = (order: Order): string => {
-  order.id = 1;
-  if (orders.length > 0) {
-    order.id = orders[orders.length - 1].id + 1;
-  }
-  orders.push(order);
-  return 'success';
+export const registerOrder = async (order: Order): Promise<string> => {
+  const result = await Order.create(order);
+  return result ? 'success' : 'error';
 };
 
-export const removeOrderById = (id: number): Order => {
-  let removed: Order;
-  orders = orders.filter((v: Order): boolean => {
-    if (v.id === id) {
-      removed = v;
-      return false;
-    }
-    return true;
+export const removeOrderById = async (id: number): Promise<string> => {
+  const affectedRow = await Order.destroy({
+    where: {
+      id,
+    },
   });
-  return removed;
+  return affectedRow === 0 ? 'not exist' : 'completed';
 };
 
-export const updateOrderById = (id: number, order: Order): Order => {
-  let isChanged: boolean = false;
-  orders = orders.map((v: Order): Order => {
-    if (v.id === id) {
-      v = order;
-      isChanged = true;
-    }
-    return v;
-  });
-  if (isChanged) {
-    return order;
-  }
-  return undefined;
+export const updateOrderById = async (id: number, order: Order): Promise<Order> => {
+  const result = await Order.update(
+    order,
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  const affectedRow = result[0];
+  return affectedRow === 0 ? undefined : order;
 };

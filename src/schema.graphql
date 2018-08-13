@@ -156,5 +156,5 @@ type Mutation {
   ): Order
   removeOrder(
     id: Int!
-  ): Order
+  ): String
 }
