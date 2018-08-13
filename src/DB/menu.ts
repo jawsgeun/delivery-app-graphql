@@ -1,3 +1,5 @@
+import { Menu } from './models/index';
+
 export interface Menu {
   id: number;
   restaurant_id: number;
@@ -5,120 +7,44 @@ export interface Menu {
   price: string;
 }
 
-let menus: Menu[] = [
-  {
-    id: 1,
-    restaurant_id: 1,
-    name: '소세지',
-    price: '3000',
-  },
-  {
-    id: 2,
-    restaurant_id: 1,
-    name: '햄버거',
-    price: '5000',
-  },
-  {
-    id: 3,
-    restaurant_id: 1,
-    name: '쫄면',
-    price: '4000',
-  },
-  {
-    id: 4,
-    restaurant_id: 2,
-    name: '라면',
-    price: '4000',
-  },
-  {
-    id: 5,
-    restaurant_id: 2,
-    name: '떡라면',
-    price: '3000',
-  },
-  {
-    id: 6,
-    restaurant_id: 2,
-    name: '떡꼬치',
-    price: '2000',
-  },
-  {
-    id: 7,
-    restaurant_id: 3,
-    name: '닭꼬치',
-    price: '2000',
-  },
-  {
-    id: 8,
-    restaurant_id: 3,
-    name: '돈까스',
-    price: '3000',
-  },
-  {
-    id: 9,
-    restaurant_id: 3,
-    name: '냉면',
-    price: '5000',
-  },
-  {
-    id: 10,
-    restaurant_id: 3,
-    name: '만두라면',
-    price: '3000',
-  },
-];
-
-const isExist = (menu: Menu): boolean => {
-  if (menus.filter((v: Menu) => {
-    return v.restaurant_id === menu.restaurant_id &&
-      v.name === menu.name &&
-      v.price === menu.price;
-  }).length > 0) {
-    return true;
-  }
-  return false;
-};
-
-export const getMenuByRestaurantId = (id: number): Menu[] => {
-  return menus.filter((v: Menu) => {
-    return v.restaurant_id === id;
+export const getMenuByRestaurantId = async (id: number): Promise<Menu[]> => {
+  return Menu.findAll({
+    where: {
+      restaurant_id: id,
+    },
   });
 };
 
-export const registerMenu = (menu: Menu): string => {
-  if (isExist(menu)) {
-    return 'duplicated';
-  }
-  menu.id = 1;
-  if (menus.length > 0) {
-    menu.id = menus[menus.length - 1].id + 1;
-  }
-  menus.push(menu);
-  return 'success';
+export const registerMenu = async (menu: Menu): Promise<string> => {
+  const result = Menu.findOrCreate({
+    where: {
+      restaurant_id: menu.restaurant_id,
+      name: menu.name,
+    },
+    default: menu,
+  });
+  const created = result[1];
+  return created ? 'success' : 'duplicated';
 };
 
-export const updateMenuById = (id: number, menu: Menu): Menu => {
-  let isChanged: boolean = false;
-  menus = menus.map((v: Menu): Menu => {
-    if (v.id === id) {
-      v = menu;
-      isChanged = true;
-    }
-    return v;
+export const removeMenuById = async (id: number): Promise<string> => {
+  const affectedRow = await Menu.destroy({
+    where: {
+      id,
+    },
   });
-  if (isChanged) {
-    return menu;
-  }
-  return undefined;
+  return affectedRow === 0 ? 'not exist' : 'completed';
 };
-export const removeMenuById = (id: number): Menu => {
-  let removed: Menu;
-  menus = menus.filter((v: Menu): boolean => {
-    if (v.id === id) {
-      removed = v;
-      return false;
-    }
-    return true;
-  });
-  return removed;
+
+export const updateMenuById = async (id: number, menu: Menu): Promise<Menu> => {
+  const result = await Menu.update(
+    menu,
+    {
+      where: {
+        id,
+      },
+    },
+  );
+  const affectedRow = result[0];
+  return affectedRow === 0 ? undefined : menu;
 };

@@ -146,7 +146,7 @@ type Mutation {
   ): Menu
   removeMenu(
     id: Int!
-  ): Menu
+  ): String
   registerOrder(
     orderInput: OrderInput!
   ): String!
