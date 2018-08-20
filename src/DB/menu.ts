@@ -8,7 +8,7 @@ export interface Menu {
 }
 
 export const getMenuByRestaurantId = async (id: number): Promise<Menu[]> => {
-  return Menu.findAll({
+  return await Menu.findAll({
     where: {
       restaurant_id: id,
     },
@@ -16,12 +16,12 @@ export const getMenuByRestaurantId = async (id: number): Promise<Menu[]> => {
 };
 
 export const registerMenu = async (menu: Menu): Promise<string> => {
-  const result = Menu.findOrCreate({
+  const result = await Menu.findOrCreate({
     where: {
       restaurant_id: menu.restaurant_id,
       name: menu.name,
     },
-    default: menu,
+    defaults: menu,
   });
   const created = result[1];
   return created ? 'success' : 'duplicated';
