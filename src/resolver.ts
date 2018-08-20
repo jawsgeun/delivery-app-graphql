@@ -33,7 +33,7 @@ const resolvers: IResolvers = {
     removeOrder: (obj, { id }) => o.removeOrderById(id),
   },
   Restaurant: {
-    menus: ({ id }): m.Menu[] => m.getMenuByRestaurantId(id),
+    menus: ({ id }) => m.getMenuByRestaurantId(id),
   },
 };
 
